@@ -2,20 +2,26 @@
  * ArrayStacks that have methods from Stack class
  * @author Justine Huynh
  */
-public class ArrayStack implements Stack<T> {
+public class ArrayStack<T> implements Stack<T> {
 
-    Object[] tempArray = new Object[SIZE];
-    T[] array = (T[]) tempArray;
     private int top;
-    private int SIZE = 10;
+    private int START_SIZE = 10;
+    private Object[] tempArray = new Object[START_SIZE];
+    private T[] array;
 
     /**
      * Constructs an object of type ArrayStack
      */
-    public ArrayStack() {
-
+    public ArrayStack()
+    {
         top = -1;
+        array = (T[]) tempArray;
     }
+
+//    public static <T> T[] createArray(Class<T> type, int size)
+//    {
+//        return (T[])ArrayStack.newInstance(type, size);
+//    }
 
     /**
      * Adds an item to the stop of the ArrayStack
@@ -48,9 +54,12 @@ public class ArrayStack implements Stack<T> {
      * @return the top item
      */
     public T peek() {
-        if (empty())
-        {
-            throw new IllegalArgumentException("Sorry! ArrayStack is empty!");
+        if (empty()) {
+            try {
+                throw new Exception("Sorry! ArrayStack is empty!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return array[top];
     }
@@ -59,20 +68,21 @@ public class ArrayStack implements Stack<T> {
      * Checks if the ArrayStack is empty
      * @return true if the ArrayStack is empty; false otherwise
      */
-    public boolean empty() {
+    public boolean empty()
+    {
         return top == -1;
-
     }
 
     /**
      * Grows the array to twice its size
      */
     protected void grow_array() {
-        T[] temp = new T[array.length *2];
+        Object[] tempArray = new Object[array.length * 2];
+        T[] twiceArray = (T[]) tempArray;
         for (int index = 0; index < array.length; index ++)
         {
-            temp[index] = array[index];
+            twiceArray[index] = array[index];
         }
-        array = temp;
+        array = twiceArray;
     }
 }

@@ -57,16 +57,21 @@ public class Practice06Test {
 		try {
 			// If the stack and queue are empty (default), that's a milestone.
 			if (stack.empty())
+			{
 				grade += 5;
-			if (queue.empty())
+			}
+			if (queue.empty()) {
 				grade += 5;
+			}
+
+
 			System.out.println("[+" + grade + "%] Queue and Stack declared correctly.");
 	
 			// First tests: is the queue correct? Is the stack correct?
 			String first = "first";
 			String second = "second";
 			queue.enqueue(first);
-			queue.enqueue(second);
+			queue.enqueue(second); // the code stops here.
 			if (queue.dequeue() == first && queue.dequeue() == second && queue.empty()) {
 				System.out.println("[+10%] Queue functions appear correct.");
 				grade += 10;
@@ -82,7 +87,7 @@ public class Practice06Test {
 			} else {
 				System.out.println("[ XX ] One or more Stack functions appear incorrect.");
 			}
-			
+			// here
 			// Additional sanity test: place a large number of items in the stack / queue to see if it resizes.
 			for (int i = 0; i < size_of_test; i++) {
 				queue.enqueue(randomString);
@@ -91,8 +96,9 @@ public class Practice06Test {
 			boolean emptiedEarly = false;
 			for (int i = 0; i < size_of_test; i++) {
 				if ( queue.empty() || stack.empty()) {
-					emptiedEarly = true;
+				    emptiedEarly = true;
 				}
+				// never comes here
 				queue.dequeue();
 				stack.pop();
 			}
